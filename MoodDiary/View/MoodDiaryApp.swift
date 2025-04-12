@@ -2,7 +2,7 @@
 //  MoodDiaryApp.swift
 //  MoodDiary
 //
-//  Created by Данил Аникин on 12.04.2025.
+//  Created by anikin02 on 12.04.2025.
 //
 
 import SwiftUI
