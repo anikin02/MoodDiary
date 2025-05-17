@@ -40,7 +40,12 @@ struct TopBarWelcomeView: View {
   var body: some View {
     HStack{
       Spacer()
-      Spacer()
+      
+      Image(systemName: "calendar")
+        .font(.title)
+        .bold()
+        .tint(.black)
+      
       Spacer()
       Spacer()
       
@@ -51,7 +56,7 @@ struct TopBarWelcomeView: View {
           .tint(.black)
       }
       
-      Text("Mar, 2025")
+      Text("17 May, 2025")
         .font(.title)
         .bold()
       
