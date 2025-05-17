@@ -23,6 +23,12 @@ class MoodState: Equatable {
     && (rhs.state == lhs.state)
     && (rhs.description == lhs.description)
   }
+  
+  func getTime() -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter.string(from: date)
+  }
 }
 
 enum State {

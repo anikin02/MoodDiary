@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct WelcomeView: View {
   var body: some View {
@@ -14,8 +15,13 @@ struct WelcomeView: View {
         TopBarWelcomeView()
         Spacer()
         ScrollView{
-          
+          MoodCardView()
+          MoodCardView()
+          MoodCardView()
+          MoodCardView()
         }
+        .padding(10)
+        .scrollIndicators(.hidden)
       }
       
       Button {
@@ -25,7 +31,8 @@ struct WelcomeView: View {
           Image(systemName: "plus.circle.fill")
             .resizable()
             .frame(width: 25, height: 25)
-          Text("Record Today's Mood").font(.system(size: 20, weight: .black))
+          Text("Record Today's Mood")
+            .font(.system(size: 20, weight: .black))
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 20)
@@ -36,54 +43,29 @@ struct WelcomeView: View {
   }
 }
 
-struct TopBarWelcomeView: View {
+struct MoodCardView: View {
+  let moodState = MoodState(date: .now, state: .angry, description: "Мне не пришли деньги деньги деньги деньги деньги деньги деньги деньги деньги деньги ")
+  
   var body: some View {
-    HStack{
-      Spacer()
-      
-      Image(systemName: "calendar")
-        .font(.title)
-        .bold()
-        .tint(.black)
-      
-      Spacer()
-      Spacer()
-      
-      Button(action: previousMonth) {
-        Image(systemName: "arrow.left")
-          .font(.title)
-          .bold()
-          .tint(.black)
+    VStack{
+      Text("😡")
+        .font(.system(size: 80))
+      Text(moodState.description)
+        .multilineTextAlignment(.center)
+        .lineLimit(2)
+      HStack {
+        Spacer()
+        Text(moodState.getTime())
       }
-      
-      Text("17 May, 2025")
-        .font(.title)
-        .bold()
-      
-      Button(action: nextMonth) {
-        Image(systemName: "arrow.right")
-          .font(.title)
-          .bold()
-          .tint(.black)
-      }
-      
-      Spacer()
-      
-      Image(systemName: "chart.bar.fill")
-        .font(.title)
-        .bold()
-        .tint(.black)
-      
-      Spacer()
     }
+    .frame(width: .infinity)
+    .padding(15)
+    .background(Color.gray.opacity(0.2))
+    .clipShape(.rect(cornerRadius: 20))
+    .padding(.horizontal, 10)
+    
+    
     
   }
   
-  func previousMonth() {
-    
-  }
-  
-  func nextMonth() {
-    
-  }
 }
