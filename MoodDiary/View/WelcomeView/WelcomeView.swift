@@ -9,24 +9,23 @@ import SwiftUI
 import Foundation
 
 struct WelcomeView: View {
+  @State private var refreshID = UUID()
   var body: some View {
     ZStack(alignment: .bottom){
       VStack{
         TopBarWelcomeView()
         Spacer()
         ScrollView{
-          MoodCardView()
-          MoodCardView()
-          MoodCardView()
-          MoodCardView()
+          ForEach(DataManager.shared.getMoodStates()) { item in
+            MoodCardView(moodState: item)
+          }
+          .id(refreshID)
         }
         .padding(10)
         .scrollIndicators(.hidden)
       }
       
-      Button {
-        print("Print something")
-      } label: {
+      NavigationLink(destination: MoodStateView()) {
         HStack {
           Image(systemName: "plus.circle.fill")
             .resizable()
@@ -38,17 +37,23 @@ struct WelcomeView: View {
         .padding(.horizontal, 20)
         .background(.black)
         .clipShape(.capsule)
+        .onAppear {
+          refreshList()
+        }
       }
     }
+  }
+  private func refreshList() {
+    refreshID = UUID()
   }
 }
 
 struct MoodCardView: View {
-  let moodState = MoodState(date: .now, state: .angry, description: "Мне не пришли деньги деньги деньги деньги деньги деньги деньги деньги деньги деньги ")
+  let moodState: MoodState
   
   var body: some View {
     VStack{
-      Text("😡")
+      Text(moodState.state.rawValue)
         .font(.system(size: 80))
       Text(moodState.description)
         .multilineTextAlignment(.center)

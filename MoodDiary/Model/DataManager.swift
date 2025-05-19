@@ -11,10 +11,16 @@ class DataManager {
   private init() {}
   static let shared = DataManager()
   
-  private var moodStates: [MoodState] = []
+  private var moodStates: [MoodState] = [MoodState(date: .now, state: .happy, description: "Мне пришли ДЕНЬГИ"), MoodState(date: .now, state: .angry, description: "Мне не пришли деньги деньги деньги деньги деньги деньги деньги деньги деньги деньги "), MoodState(date: .now, state: .normal, description: "Just kidding..."), MoodState(date: .now, state: .angry, description: "Мне не пришли деньги деньги деньги деньги деньги деньги деньги деньги деньги деньги "), MoodState(date: .now, state: .angry, description: "FCK"), MoodState(date: .now, state: .angry, description: "Мне не пришли деньги деньги деньги деньги деньги деньги деньги деньги деньги деньги ")]
   
   func addMoodState(moodState: MoodState) {
-    moodStates.append(moodState)
+    moodStates.insert(moodState, at: 0)
+  }
+  
+  func updateMoodState(moodState: MoodState) {
+    if let index = moodStates.firstIndex(of: moodState) {
+      moodStates[index] = moodState
+    }
   }
   
   func getMoodStates() -> [MoodState] {
